@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ARCC</string>
+    <string name="address_box">Адресс</string>
+    <string name="password_box">Пароль</string>
+    <string name="port_box">Порт</string>
+    <string name="user_name_box">Пользователь</string>
+    <string name="connect_button">Подключить</string>
+    <string name="connection_title">Параметры подключения</string>
+    <string name="login_title">Вход</string>
+    <string name="error_title">Ошибка</string>
+    <string name="connection_error_msg">Не возможно подключиться к серверу.</string>
+    <string name="mode_label">Режим</string>
+    <string name="auto_label">Автономный</string>
+    <string name="hand_label">Ручной</string>
+    <string name="remote_label">ДУ</string>
+</resources>

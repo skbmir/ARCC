@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ARCC</string>
+    <string name="address_box">Address</string>
+    <string name="port_box">Port</string>
+    <string name="user_name_box">User</string>
+    <string name="password_box">Password</string>
+    <string name="connect_button">Connect</string>
+    <string name="default_address" translatable="false">localhost</string>
+    <string name="default_port" translatable="false">4222</string>
+    <string name="connection_title">Connection parameters</string>
+    <string name="login_title">Log In</string>
+    <string name="error_title">Error</string>
+    <string name="connection_error_msg">Can\'t connect to server.</string>
+
+    <string name="title_activity_rc">RCActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="mode_label">Mode</string>
+    <string name="hand_label">Hand</string>
+    <string name="remote_label">RC</string>
+    <string name="auto_label">Auto</string>
+</resources>
