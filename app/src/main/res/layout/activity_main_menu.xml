@@ -54,5 +54,16 @@
             android:layout_width="0dp"
             android:layout_height="0dp" app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0">
+        <Button
+                android:text="@string/gear_control_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:id="@+id/gearControlButton" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+                android:background="@color/mainBgEnd" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

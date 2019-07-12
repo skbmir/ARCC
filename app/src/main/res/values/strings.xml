@@ -19,4 +19,5 @@
     <string name="hand_label">Hand</string>
     <string name="remote_label">RC</string>
     <string name="auto_label">Auto</string>
+    <string name="gear_control_button">Gear control</string>
 </resources>

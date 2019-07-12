@@ -156,6 +156,7 @@ class NATSClient : IntentService("NATSClient") {
         val data = packer.toByteArray()
 
         NATSClient.connection.publish("cmd", packer.toByteArray())
+        NATSClient.connection.flush(Duration.ZERO)
     }
 
     companion object {
