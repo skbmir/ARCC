@@ -3,12 +3,10 @@ package com.skbmir.arcc
 import android.app.IntentService
 import android.content.Intent
 import android.content.Context
-import io.nats.client.Options
-import io.nats.client.Connection
-import io.nats.client.Nats
-import io.nats.client.Duration
+import io.nats.client.*
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageBufferPacker
+import java.util.concurrent.CountDownLatch
 
 
 // NATSClient actions
@@ -32,6 +30,10 @@ private const val EXTRA_STEER = "com.skbmir.arcc.extra.STEER"
 const val CONNECT_REPORT = "com.skbmir.arcc.action.CONNECT_REPORT"
 const val EXTRA_CONNECT_ERR_MSG = "com.skbmir.arcc.extra.CONNECT_ERR_MSG"
 
+const val MSG_REPORT = "com.skbmir.arcc.action.MSG_REPORT"
+const val EXTRA_SUBJECT = "com.skbmir.arcc.extra.SUBJECT"
+const val EXTRA_DATA = "com.skbmir.arcc.extra.DATA"
+
 // Control modes
 const val MODE_HAND = 0
 const val MODE_RC = 1
@@ -50,9 +52,23 @@ const val GEAR_FIFTH = 5
  * An [IntentService] subclass for handling asynchronous NATS connection
  * as a service on a separate handler thread.
  */
-class NATSClient : IntentService("NATSClient") {
+class NATSClient : IntentService("NATSClient"), MessageHandler {
 
     //private lateinit var publisher:
+
+    override fun onMessage(msg: Message?) {
+        if (msg != null) {
+            val subject = msg.subject
+            val data = msg.data
+
+            val report = Intent(MSG_REPORT).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                putExtra(EXTRA_SUBJECT, subject)
+                putExtra(EXTRA_DATA, data)
+            }
+            sendBroadcast(report)
+        }
+    }
 
     override fun onHandleIntent(intent: Intent?) {
         when (intent?.action) {
@@ -116,7 +132,8 @@ class NATSClient : IntentService("NATSClient") {
             }
             sendBroadcast(report)
 
-
+            NATSClient.latch = CountDownLatch(1)
+            NATSClient.dispatcher = connection.createDispatcher(this)
         }
         catch (exc: Exception) {
             val report = Intent(CONNECT_REPORT).apply {
@@ -162,6 +179,12 @@ class NATSClient : IntentService("NATSClient") {
     companion object {
         // variable to handle NATS connection
         private lateinit var connection: Connection
+
+        // latch to wait for messages from NATS server
+        private lateinit var latch: CountDownLatch
+
+        // received message dispatcher
+        private lateinit var dispatcher: Dispatcher
 
         /**
          * Start this service to perform connection to NATS server. If the
